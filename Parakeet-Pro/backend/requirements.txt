@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+soundcard
+numpy
+deepgram-sdk
+python-dotenv
+websockets
+openai
+groq
