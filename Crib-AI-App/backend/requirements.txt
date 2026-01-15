@@ -7,3 +7,4 @@ python-dotenv
 websockets
 openai
 groq
+firebase-admin

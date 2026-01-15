@@ -86,9 +86,14 @@ cd Crib-AI-App
     - Add your API Keys:
       ```ini
       DEEPGRAM_API_KEY=your_key_here
-      GROQ_API_KEY=your_key_here  # Recommended for speed
-      OPENAI_API_KEY=your_key_here # Fallback
+      GROQ_API_KEY=your_key_here
+      OPENAI_API_KEY=your_key_here
       ```
+5.  **Firebase Setup (Required)**:
+    - You must have a Firebase Project.
+    - Set up **Authentication** (Email/Password provider).
+    - Set up **Firestore Database**.
+    - For the backend to verify tokens, ensure you have Google Application Credentials set up if running in a restricted environment (locally it usually works with default login or you may need to export `GOOGLE_APPLICATION_CREDENTIALS="path/to/service-account.json"`).
 
 ### 3. Frontend Setup
 1.  Navigate to the electron directory:
@@ -99,6 +104,9 @@ cd Crib-AI-App
     ```bash
     npm install
     ```
+3.  **Configure Firebase**:
+    - Open `electron/firebase_config.js`.
+    - Replace the placeholder `apiKey`, `authDomain`, etc. with your values from the Firebase Console.
 
 ---
 
