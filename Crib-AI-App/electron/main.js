@@ -31,9 +31,8 @@ function createWindow() {
 
   // Load the React app
   // In development, this would be localhost:3000
-  // In production, it would be the build file
-  const startUrl = process.env.ELECTRON_START_URL || `file://${path.join(__dirname, '../build/index.html')}`;
-  mainWindow.loadURL(startUrl);
+  // Load local HTML file
+  mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   mainWindow.on('closed', function () {
     mainWindow = null;
@@ -43,11 +42,11 @@ function createWindow() {
   globalShortcut.register('CommandOrControl+Shift+X', () => {
     console.log('PANIC MODE ACTIVATED');
     if (mainWindow) {
-        // Option 1: Destroy immediately
-        app.quit(); 
-        
-        // Option 2 (Alternative): Hide window
-        // mainWindow.hide();
+      // Option 1: Destroy immediately
+      app.quit();
+
+      // Option 2 (Alternative): Hide window
+      // mainWindow.hide();
     }
   });
 

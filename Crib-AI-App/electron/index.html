@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Crib AI Overlay</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            color: white;
+            -webkit-user-select: none;
+        }
+
+        /* The container that holds all UI */
+        #app-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Bottom alignment */
+            padding: 20px;
+            box-sizing: border-box;
+            transition: opacity 0.3s ease;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 600px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #transcript-box {
+            font-size: 14px;
+            opacity: 0.8;
+            max-height: 100px;
+            overflow-y: hidden;
+        }
+
+        #answer-box {
+            font-size: 16px;
+            font-weight: 500;
+            color: #00ffcc; /* Cyberpunk teal */
+        }
+
+        /* Speedometer Widget */
+        #status-bar {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .metric {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00ff00;
+            border-radius: 50%;
+        }
+
+        /* Ghost Mode: Reduces opacity of everything except critical text */
+        .ghost-mode-active {
+            opacity: 0.3;
+        }
+
+        /* Interactive elements allow clicking */
+        .interactive {
+            -webkit-app-region: no-drag;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="app-container">
+        <!-- Status Bar -->
+        <div id="status-bar" class="interactive">
+            <div class="metric" id="wpm-gauge">
+                <span>Speed:</span>
+                <span id="wpm-value">120</span> wpm
+                <div class="dot" id="wpm-indicator"></div>
+            </div>
+            <div class="metric" id="ghost-toggle" onclick="toggleGhostMode()">
+                👻 Ghost Mode
+            </div>
+            <div class="metric" id="status-indicator">
+                <div class="dot"></div> Online
+            </div>
+        </div>
+
+        <!-- AI Answer Area -->
+        <div id="answer-card" class="card interactive" style="display: none;">
+            <div id="answer-box">Waiting for answer...</div>
+        </div>
+
+        <!-- Transcript Area -->
+        <div id="transcript-card" class="card interactive">
+            <div id="transcript-box">Listening for interviewer...</div>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
