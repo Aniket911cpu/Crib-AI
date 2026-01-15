@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Crib AI Overlay</title>
@@ -20,7 +21,8 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end; /* Bottom alignment */
+            justify-content: flex-end;
+            /* Bottom alignment */
             padding: 20px;
             box-sizing: border-box;
             transition: opacity 0.3s ease;
@@ -34,7 +36,7 @@
             margin-bottom: 10px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             max-width: 600px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         #transcript-box {
@@ -47,7 +49,8 @@
         #answer-box {
             font-size: 16px;
             font-weight: 500;
-            color: #00ffcc; /* Cyberpunk teal */
+            color: #00ffcc;
+            /* Cyberpunk teal */
         }
 
         /* Speedometer Widget */
@@ -90,6 +93,7 @@
         }
     </style>
 </head>
+
 <body>
     <div id="app-container">
         <!-- Status Bar -->
@@ -107,17 +111,48 @@
             </div>
         </div>
 
+        <!-- Auth Overlay (Blocks app until login) -->
+        <div id="auth-overlay" class="card interactive"
+            style="position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 300px; text-align: center; z-index: 1000;">
+            <h2 id="auth-title">Crib AI Login</h2>
+            <input type="email" id="email-input" placeholder="Email"
+                style="width: 90%; padding: 8px; margin: 5px; background: rgba(0,0,0,0.5); color: white; border: 1px solid #555;">
+            <input type="password" id="password-input" placeholder="Password"
+                style="width: 90%; padding: 8px; margin: 5px; background: rgba(0,0,0,0.5); color: white; border: 1px solid #555;">
+            <button id="auth-btn"
+                style="width: 95%; padding: 8px; margin: 5px; background: #00ffcc; border: none; font-weight: bold; cursor: pointer;">Login</button>
+            <p style="font-size: 12px; cursor: pointer; color: #ccc;" id="toggle-auth-mode">Need an account? Sign Up</p>
+            <p id="auth-error" style="color: #ff0055; font-size: 12px;"></p>
+        </div>
+
+        <!-- Feedback Modal (Hidden by default) -->
+        <div id="feedback-modal" class="card interactive"
+            style="position: absolute; top: 10%; right: 10px; width: 250px; display: none; z-index: 1000;">
+            <h3>Feedback</h3>
+            <textarea id="feedback-text" rows="4"
+                style="width: 95%; background: rgba(0,0,0,0.5); color: white; border: 1px solid #555;"
+                placeholder="Bug report or feature request..."></textarea>
+            <button id="feedback-btn"
+                style="width: 100%; margin-top: 5px; background: #0088ff; border: none; color: white;">Submit</button>
+            <button onclick="document.getElementById('feedback-modal').style.display='none'"
+                style="width: 100%; margin-top: 5px; background: transparent; border: 1px solid #555; color: #ccc;">Close</button>
+        </div>
+
         <!-- AI Answer Area -->
         <div id="answer-card" class="card interactive" style="display: none;">
             <div id="answer-box">Waiting for answer...</div>
+            <div style="text-align: right; font-size: 10px; color: #888; cursor: pointer;"
+                onclick="document.getElementById('feedback-modal').style.display='block'">Report Issue</div>
         </div>
 
         <!-- Transcript Area -->
-        <div id="transcript-card" class="card interactive">
+        <div id="transcript-card" class="card interactive" style="display: none;"> <!-- Hidden until login -->
             <div id="transcript-box">Listening for interviewer...</div>
         </div>
     </div>
 
-    <script src="renderer.js"></script>
+    <!-- Scripts: Firebase is module-based, renderer needs to handle imports -->
+    <script type="module" src="renderer.js"></script>
 </body>
+
 </html>
